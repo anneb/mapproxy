@@ -282,7 +282,7 @@ class WMSServer(Server):
 
     def _service_md(self, map_request):
         md = dict(self.md)
-        md['url'] = map_request.url
+        md['url'] = map_request.http.resource_url
         md['has_legend'] = self.root_layer.has_legend
         return md
 

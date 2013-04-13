@@ -169,7 +169,7 @@ class TileServer(Server):
 
     def _service_md(self, map_request):
         md = dict(self.md)
-        md['url'] = map_request.http.base_url
+        md['url'] = map_request.http.resource_url + path_info
         return md
 
     def _render_template(self, layers, service):

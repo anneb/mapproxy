@@ -261,6 +261,22 @@ class Request(object):
                 + urllib.quote(self.environ.get('PATH_INFO', ''))
                )
 
+    @property
+    def resource_url(self):
+        forwarded_path = self.environ.get('HTTP_X_FORWARDED_PATH')
+        if forwarded_path:
+            path_info = self.environ.get('PATH_INFO')
+            pos = path_info.rfind('tms')
+            if pos >= 0:
+               path_info = path_info[pos+3:]
+            else:
+               path_info = ''
+            return (self.host_url.rstrip('/')
+                + urllib.quote(forwarded_path).rstrip('/') + path_info)
+        else:
+            return self.base_url
+               
+               
 class RequestParams(object):
     """
     This class represents key-value request parameters. It allows case-insensitive

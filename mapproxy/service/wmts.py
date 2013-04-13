@@ -145,7 +145,7 @@ class WMTSServer(Server):
 
     def _service_md(self, tile_request):
         md = dict(self.md)
-        md['url'] = tile_request.url
+        md['url'] = tile_request.http.resource_url
         return md
 
 
